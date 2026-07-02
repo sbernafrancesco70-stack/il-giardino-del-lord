@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Il Giardino del Lord</title>
+<meta name="description" content="Il Giardino del Lord — un'estate, sei capitoli.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader">
+  <div class="preloader-mark">IL GIARDINO DEL LORD</div>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav id="site-nav">
+  <button class="nav-menu" id="menuToggle" aria-label="Apri menu">
+    <span class="nav-menu-label">MENU</span>
+    <span class="hamburger"><i></i><i></i><i></i></span>
+  </button>
+</nav>
+
+<!-- ============ MENU OVERLAY ============ -->
+<div id="menu-overlay">
+  <ul class="menu-list">
+    <li><a href="#section-0" data-menu-link>01 — IGDL</a></li>
+    <li><a href="#section-1" data-menu-link>02 — Se mai</a></li>
+    <li><a href="#section-2" data-menu-link>03 — Qualcuno capira'</a></li>
+    <li><a href="#section-3" data-menu-link>04 — Sara' senz'altro</a></li>
+    <li><a href="#section-4" data-menu-link>05 — Un altro</a></li>
+    <li><a href="#section-5" data-menu-link>06 — Come me</a></li>
+  </ul>
+  <div class="menu-footer">
+    <span>info@ilgiardinodellord.it</span>
+    <span>@ilgiardinodellord</span>
+  </div>
+</div>
+
+<!-- ============ MAIN SCROLL CONTAINER ============ -->
+<main id="main">
+  <!-- Le sezioni vengono generate da JS a partire da SECTIONS_DATA in main.js -->
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer id="site-footer">
+  <div class="footer-row">
+    <div class="footer-block">
+      <span class="footer-label">Contatti</span>
+      <a href="mailto:info@ilgiardinodellord.it">info@ilgiardinodellord.it</a>
+    </div>
+    <div class="footer-block footer-block-right">
+      <span class="footer-label">Seguici</span>
+      <a href="#" target="_blank" rel="noopener">@ilgiardinodellord</a>
+    </div>
+  </div>
+  <h2 class="footer-wordmark">Il Giardino<br>del Lord</h2>
+  <a href="#" class="footer-cta">Acquista il magazine</a>
+  <div class="footer-fine">© 2026 — Il Giardino del Lord</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script src="fireflies.js"></script>
+</body>
+</html>

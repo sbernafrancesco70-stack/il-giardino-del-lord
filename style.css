@@ -1,0 +1,424 @@
+/* =========================================================
+   IL GIARDINO DEL LORD — stylesheet
+   ========================================================= */
+
+@font-face {
+  font-family: "College Block";
+  src: url("fonts/College Block 2.0.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --c-giallo: #E9C945;
+  --c-seppia: #262020;
+  --c-white: #F5F2EC;
+  --c-black: #0D0B0A;
+
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-hero: "College Block", var(--font-display);
+
+  --bp-mobile: 390px;
+  --bp-desktop: 1440px;
+
+  --ease-reveal: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-hero);
+  background: var(--c-seppia);
+  color: var(--c-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* il cursore reale resta nascosto ovunque: fuori dal menu è sostituito dal
+   pallino sabbioso (#site-cursor), dentro dal cursore-lucciola */
+html, body, a, button {
+  cursor: none;
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+::selection {
+  background: var(--c-giallo);
+  color: var(--c-seppia);
+}
+
+/* =========================================================
+   CURSORE DEL SITO — pallino sfumato giallo con grana sabbiosa
+   ========================================================= */
+#site-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* =========================================================
+   LUCCIOLE — velo scuro + luce calda (canvas overlay, solo nel menu)
+   ========================================================= */
+#firefly-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0;
+  /* stessa durata/easing della tendina di #menu-overlay: entrano ed
+     escono insieme, come se fossero un'unica cosa */
+  transition: opacity 0.7s var(--ease-reveal);
+}
+
+/* =========================================================
+   PRELOADER
+   ========================================================= */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--c-seppia);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.preloader-mark {
+  font-family: var(--font-hero);
+  font-weight: 800;
+  font-size: clamp(28px, 5vw, 56px);
+  letter-spacing: 0.02em;
+  color: var(--c-giallo);
+  opacity: 0;
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+#site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 48px;
+  mix-blend-mode: normal;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-menu-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 22px;
+}
+.hamburger i {
+  display: block;
+  height: 1.4px;
+  width: 100%;
+  background: var(--c-white);
+}
+
+/* =========================================================
+   MENU OVERLAY
+   ========================================================= */
+#menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: var(--c-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  transform: translateY(-100%);
+  transition: transform 0.7s var(--ease-reveal);
+}
+#menu-overlay.open {
+  transform: translateY(0);
+}
+
+.menu-list {
+  list-style: none;
+  text-align: center;
+}
+.menu-list li {
+  overflow: hidden;
+}
+.menu-list a {
+  display: block;
+  font-family: var(--font-hero);
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 64px);
+  color: var(--c-white);
+  padding: 6px 0;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+.menu-list a:hover {
+  color: var(--c-giallo);
+}
+
+.menu-footer {
+  display: flex;
+  gap: 40px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 242, 236, 0.6);
+}
+
+/* =========================================================
+   MAIN / SECTIONS
+   ========================================================= */
+#main {
+  position: relative;
+}
+
+.reveal-section {
+  position: relative;
+  height: 320vh; /* spazio di scroll entro cui avviene il reveal + permanenza */
+}
+
+.reveal-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal-section.color-seppia .reveal-stage { background: var(--c-seppia); }
+.reveal-section.color-giallo .reveal-stage { background: var(--c-giallo); }
+
+.reveal-frame {
+  position: relative;
+  width: var(--frame-w, 0px);
+  height: var(--frame-h, 0px);
+  overflow: hidden;
+  will-change: width, height;
+}
+
+.reveal-frame img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--img-w, 100vw);
+  height: var(--img-h, 100vh);
+  max-width: none;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  will-change: width, height, filter;
+}
+
+.reveal-title {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-hero);
+  font-weight: 800;
+  /* dimensione di base del browser per h2 (24px) + 10pt */
+  font-size: calc(24px + 10pt);
+  letter-spacing: -0.01em;
+  pointer-events: none;
+  z-index: 10;
+  transform: translateY(-50%);
+  mix-blend-mode: normal;
+  color: var(--c-white);
+}
+
+.reveal-title .word {
+  display: block;
+}
+
+/* titolo diviso in due righe (hero della prima sezione):
+   ogni parola è posizionata e animata in modo indipendente */
+.reveal-title-split {
+  position: absolute;
+  inset: 0;
+  transform: none;
+  mix-blend-mode: normal;
+  color: var(--c-giallo);
+}
+
+.reveal-title-split .word {
+  position: absolute;
+  left: 50%;
+  white-space: nowrap;
+  font-family: var(--font-hero);
+  font-size: clamp(58px, 19.5vw, 320px);
+  line-height: 0.94;
+  text-align: center;
+}
+
+/* ancorate al proprio bordo (non al centro), così il padding rispetto
+   al bordo dello schermo resta costante qualunque sia la dimensione del font */
+.reveal-title-split .word-top {
+  transform: translate(-50%, 0);
+}
+.reveal-title-split .word-bottom {
+  /* "del Lord" ha meno caratteri di "Il giardino": ingrandita perché
+     arrivi anche lei quasi a toccare i bordi laterali */
+  font-size: clamp(74px, 25vw, 400px);
+  transform: translate(-50%, -100%);
+}
+
+.reveal-index {
+  position: absolute;
+  z-index: 12;
+  bottom: 32px;
+  left: 32px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+#site-footer {
+  position: relative;
+  background: var(--c-seppia);
+  padding: 96px 48px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+.footer-row {
+  width: 100%;
+  max-width: 1344px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+}
+.footer-block-right { text-align: right; }
+.footer-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 6px;
+}
+.footer-block a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-wordmark {
+  font-family: var(--font-hero);
+  font-weight: 800;
+  font-size: clamp(40px, 9vw, 96px);
+  color: var(--c-giallo);
+  line-height: 1.02;
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--c-giallo);
+  color: var(--c-seppia);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: transform 0.3s var(--ease-reveal), background 0.3s ease;
+}
+.footer-cta:hover {
+  background: var(--c-white);
+  transform: translateY(-2px);
+}
+
+.footer-fine {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 0.4;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px) {
+  #site-nav {
+    padding: 18px 20px;
+  }
+  .hamburger { display: flex; }
+  .nav-menu-label { display: none; }
+
+  .reveal-section {
+    height: 260vh;
+  }
+
+  .reveal-index {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .footer-row {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+    align-items: center;
+  }
+  .footer-block-right { text-align: center; }
+  #site-footer { padding: 72px 20px 40px; gap: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
